@@ -92,7 +92,7 @@ extension NewsViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 //     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ViewServiceSegue", sender: indexPath)
+        performSegue(withIdentifier: "ViewNewsSegue", sender: indexPath)
     }
     
     

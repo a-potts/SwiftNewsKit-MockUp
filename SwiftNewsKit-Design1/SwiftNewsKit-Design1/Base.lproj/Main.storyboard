@@ -14,13 +14,44 @@
                     <view key="view" contentMode="scaleToFill" id="2Hc-Bs-tqx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1bD-8T-Kku">
+                                <rect key="frame" x="0.0" y="254" width="414" height="642"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92483610277853645" green="0.92483610277853645" blue="0.92483610277853645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1bD-8T-Kku" firstAttribute="leading" secondItem="bbF-MC-dmV" secondAttribute="leading" id="8hc-ql-7fc"/>
+                            <constraint firstItem="1bD-8T-Kku" firstAttribute="trailing" secondItem="bbF-MC-dmV" secondAttribute="trailing" id="AwI-st-4zS"/>
+                            <constraint firstItem="1bD-8T-Kku" firstAttribute="top" secondItem="bbF-MC-dmV" secondAttribute="top" constant="210" id="Sbd-on-nOP"/>
+                            <constraint firstAttribute="bottom" secondItem="1bD-8T-Kku" secondAttribute="bottom" id="rgw-Xy-3sS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bbF-MC-dmV"/>
                     </view>
+                    <connections>
+                        <segue destination="728-JR-8jJ" kind="show" identifier="ViewNewsSegue" id="wqs-xP-Jy9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIl-pX-ACx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="127"/>
+            <point key="canvasLocation" x="-2.8985507246376816" y="126.5625"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1gk-BJ-e2i">
+            <objects>
+                <viewController id="728-JR-8jJ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="izE-2K-mR9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="GBY-3L-S97"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fjn-gR-wQ4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0P8-Xc-CsL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="859" y="127"/>
         </scene>
     </scenes>
 </document>
