@@ -96,7 +96,7 @@ extension NewsViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         urlToOpen = URL(string: "https://www.techcrunch.com")
-        performSegue(withIdentifier: Storyboard.WebBrowserSegue, sender: self)
+        performSegue(withIdentifier: "WebSegue", sender: indexPath)
         
         //performSegue(withIdentifier: "ViewNewsSegue", sender: indexPath)
     }
