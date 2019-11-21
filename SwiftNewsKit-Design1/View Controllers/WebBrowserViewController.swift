@@ -29,7 +29,6 @@ class WebBrowserViewController: UIViewController {
         // Open Website
         if let receivedLink = receivedLink {
             openWebsite(url: receivedLink)
-            
         }
     }
     
@@ -45,18 +44,27 @@ class WebBrowserViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let result = result as? String {
                         self.navigationItem.title = result
-                        self.scrapeTitles()
+                        self.scrapeTitles(url: url)
                     }
                 }
             }
         }
     }
     
-    private func scrapeTitles(){
-        webView.evaluateJavaScript("document.getElementsByTagName('html')[0].innerHTML") { (result, error) in
-            // code below
-            print(result)
-        }
+    private func scrapeTitles(url: URL){
+        do {
+              let html = try String(contentsOf: url)
+              print("Page HTML: ", html)
+          } catch {
+              // contents could not be loaded
+            print("Error loading page contents")
+          }
+        
+        //"document.getElementsByTagName('html')[0].innerHTML"
+//        webView.evaluateJavaScript("document.getElementsById('html')[0].innerHTML") { (result, error) in
+//            // code below
+//            print(result)
+//        }
         
     }
 
