@@ -29,6 +29,7 @@ class WebBrowserViewController: UIViewController {
         // Open Website
         if let receivedLink = receivedLink {
             openWebsite(url: receivedLink)
+            
         }
     }
     
@@ -44,6 +45,7 @@ class WebBrowserViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let result = result as? String {
                         self.navigationItem.title = result
+                        self.scrapeTitles()
                     }
                 }
             }
@@ -51,8 +53,9 @@ class WebBrowserViewController: UIViewController {
     }
     
     private func scrapeTitles(){
-        webView.evaluateJavaScript(<#T##javaScriptString: String##String#>) { (result, error) in
+        webView.evaluateJavaScript("document.getElementsByTagName('html')[0].innerHTML") { (result, error) in
             // code below
+            print(result)
         }
         
     }
