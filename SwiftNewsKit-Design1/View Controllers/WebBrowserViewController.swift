@@ -49,6 +49,13 @@ class WebBrowserViewController: UIViewController {
             }
         }
     }
+    
+    private func scrapeTitles(){
+        webView.evaluateJavaScript(<#T##javaScriptString: String##String#>) { (result, error) in
+            // code below
+        }
+        
+    }
 
     // MARK: - UI
     
