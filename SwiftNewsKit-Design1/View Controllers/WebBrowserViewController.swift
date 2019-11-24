@@ -44,14 +44,14 @@ class WebBrowserViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let result = result as? String {
                         self.navigationItem.title = result
-                        self.scrapeTitles(url: url)
+                        self.scrapeUrls(url: url)
                     }
                 }
             }
         }
     }
     
-    private func scrapeTitles(url: URL){
+    private func scrapeUrls(url: URL){
         do {
               let html = try String(contentsOf: url)
               print("Page HTML: ", html)
@@ -61,10 +61,11 @@ class WebBrowserViewController: UIViewController {
           }
         
         //"document.getElementsByTagName('html')[0].innerHTML"
-//        webView.evaluateJavaScript("document.getElementsById('html')[0].innerHTML") { (result, error) in
-//            // code below
-//            print(result)
-//        }
+        webView.evaluateJavaScript("document.getElementsById('html')[0].innerHTML") { (result, error) in
+            // pull array of article urls: [URL]
+            print(result)
+            
+        }
         
     }
 
