@@ -46,39 +46,47 @@ class WebBrowserViewController: UIViewController {
                 DispatchQueue.main.async {
                     if let result = result as? String {
                         self.navigationItem.title = result
-                        self.scrapeUrls(url: url)
+                        let allArticleUrls = self.scrapeUrls(url: url)
+                        
+                        // We now want to run this array through readability kit
+                        
                     }
                 }
             }
         }
     }
     
-    private func scrapeUrls(url: URL){
+    private func scrapeUrls(url: URL) -> [String]? {
         do {
             let html = try String(contentsOf: url)
             let doc: Document = try SwiftSoup.parse(html)
             let div: Elements = try doc.select("ii") // <div></div>
             let elements = try doc.getAllElements()
             
-//            guard let els: Elements = try? SwiftSoup.parse(html).select("a") else { return }
-//            for element: Element in els.array() {
-//                print(try? element.attr("href"))
-//            }
-            
+            var allUrls = [String]()
             for element in elements {
                 switch element.tagName() {
                 case "div" :
                     if try element.className() == "ii" {
+                        // We grab the `a href` value within the "ii" div class
                         let url = try? element.select("a").attr("href")
-                        print("HERE ARTICLE URL: ", url!)
+                        
+                        // We only pull out real urls
+                        if let url = url, url.prefix(4) == "http" {
+                            allUrls.append(url)
+                        }
                     }
                 default:
                     let _ = 1
                 }
             }
+            
+            print("HERE ALL URLS: ", allUrls.count, allUrls)
+            return allUrls
         } catch {
             // contents could not be loaded
             print("Error loading page contents")
+            return nil
         }
         
     }
