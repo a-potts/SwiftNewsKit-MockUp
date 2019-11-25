@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SwiftSoup
 
 class WebBrowserViewController: UIViewController {
 
@@ -25,7 +26,8 @@ class WebBrowserViewController: UIViewController {
         super.viewDidLoad()
 
         //setupBackButton()
-        
+        webView.navigationDelegate = self
+
         // Open Website
         if let receivedLink = receivedLink {
             openWebsite(url: receivedLink)
@@ -60,13 +62,6 @@ class WebBrowserViewController: UIViewController {
             print("Error loading page contents")
           }
         
-        //"document.getElementsByTagName('html')[0].innerHTML"
-        webView.evaluateJavaScript("document.getElementsById('html')[0].innerHTML") { (result, error) in
-            // pull array of article urls: [URL]
-            print(result)
-            
-        }
-        
     }
 
     // MARK: - UI
@@ -91,3 +86,45 @@ class WebBrowserViewController: UIViewController {
     }
 }
 
+extension WebBrowserViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Finished navigating to url \(webView.url)")
+
+//        webView.evaluateJavaScript("myFunction()") { (any, error) in
+//            dump(error)
+//            print(any)
+//        }
+        
+//        let js = """
+//var url = document.querySelector('.free-section a').href;
+//console.log(url);
+//"""
+//
+//        """
+//        var url = document.querySelector('.ii a').href;
+//        alert(url);
+//        """
+        
+//        let js = """
+//var url_finder = class => {
+//        return document.querySelector(class).href }
+//"""
+        
+//        let js = "document.querySelector('.clus a').href;"
+//        let js = """
+//        var url = document.querySelector('.ii a').href;
+//        alert(url);
+//        """
+        //"document.getElementsByTagName('html')[0].innerHTML"  document.getElementsById('html')[0].innerHTML
+
+        
+        
+        let js = """
+console.log(document.querySelector('.free-section a').href)
+"""
+        webView.evaluateJavaScript(js) { (result, error) in
+            if let error = error {return print("HERE Error evaluating javascript: ", error)}
+            print("HERE Javascript result: ", result)
+        }
+    }
+}
