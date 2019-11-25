@@ -40,7 +40,7 @@ class WebBrowserViewController: UIViewController {
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             // We grab the page title to display in the navigation header
             self.webView.evaluateJavaScript("document.title") { result, error in
                 DispatchQueue.main.async {
