@@ -40,7 +40,7 @@ class WebBrowserViewController: UIViewController {
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             // We grab the page title to display in the navigation header
             self.webView.evaluateJavaScript("document.title") { result, error in
                 DispatchQueue.main.async {
@@ -57,11 +57,24 @@ class WebBrowserViewController: UIViewController {
         do {
             let html = try String(contentsOf: url)
             let doc: Document = try SwiftSoup.parse(html)
-            let links: Elements = try doc.select("a[href]") // a with href
-
-            for link in links {
-                // We want to narrow this down to only display links within <div class="clus"> *WE WANT THE HREF HERE* <div>
-                print("HERE LINK: ", link)
+            let div: Elements = try doc.select("ii") // <div></div>
+            let elements = try doc.getAllElements()
+            
+//            guard let els: Elements = try? SwiftSoup.parse(html).select("a") else { return }
+//            for element: Element in els.array() {
+//                print(try? element.attr("href"))
+//            }
+            
+            for element in elements {
+                switch element.tagName() {
+                case "div" :
+                    if try element.className() == "ii" {
+                        let url = try? element.select("a").attr("href")
+                        print("HERE ARTICLE URL: ", url!)
+                    }
+                default:
+                    let _ = 1
+                }
             }
         } catch {
             // contents could not be loaded
@@ -95,11 +108,6 @@ class WebBrowserViewController: UIViewController {
 extension WebBrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Finished navigating to url \(webView.url)")
-
-//        webView.evaluateJavaScript("myFunction()") { (any, error) in
-//            dump(error)
-//            print(any)
-//        }
         
 //        let js = """
 //var url = document.querySelector('.free-section a').href;
