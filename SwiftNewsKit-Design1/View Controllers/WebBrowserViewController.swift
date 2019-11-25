@@ -118,10 +118,15 @@ extension WebBrowserViewController: WKNavigationDelegate {
         //"document.getElementsByTagName('html')[0].innerHTML"  document.getElementsById('html')[0].innerHTML
 
         
-        
+        // Pull every link on website
         let js = """
-console.log(document.querySelector('.free-section a').href)
+var arr = [], l = document.links;
+for(var i=0; i<l.length; i++) {
+  arr.push(l[i].href);
+}
+arr
 """
+        
         webView.evaluateJavaScript(js) { (result, error) in
             if let error = error {return print("HERE Error evaluating javascript: ", error)}
             print("HERE Javascript result: ", result)
