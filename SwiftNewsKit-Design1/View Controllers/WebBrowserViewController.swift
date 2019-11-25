@@ -55,12 +55,18 @@ class WebBrowserViewController: UIViewController {
     
     private func scrapeUrls(url: URL){
         do {
-              let html = try String(contentsOf: url)
-              print("Page HTML: ", html)
-          } catch {
-              // contents could not be loaded
+            let html = try String(contentsOf: url)
+            let doc: Document = try SwiftSoup.parse(html)
+            let links: Elements = try doc.select("a[href]") // a with href
+
+            for link in links {
+                // We want to narrow this down to only display links within <div class="clus"> *WE WANT THE HREF HERE* <div>
+                print("HERE LINK: ", link)
+            }
+        } catch {
+            // contents could not be loaded
             print("Error loading page contents")
-          }
+        }
         
     }
 
@@ -126,10 +132,10 @@ for(var i=0; i<l.length; i++) {
 }
 arr
 """
-        
+        // This works UNCOMMENT to test javascript. Displays all links on page.
         webView.evaluateJavaScript(js) { (result, error) in
             if let error = error {return print("HERE Error evaluating javascript: ", error)}
-            print("HERE Javascript result: ", result)
+            //print("HERE Javascript result: ", result)
         }
     }
 }
